@@ -13,4 +13,4 @@ See [example demo, installation instructions and documentation](https://www.marc
 
 ## License
 
-Released under [MIT License](https://github.com/marcrobledo/input-tags-js?tab=License-1-ov-file).
+Released under [MIT License](https://github.com/marcrobledo/input-tags-js?tab=MIT-1-ov-file).
