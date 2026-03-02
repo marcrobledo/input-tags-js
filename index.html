@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Input Tags JS</title>
+	<!-- CHARSET -->
+	<meta charset="UTF-8"/>
+
+	<!-- META tags -->
+	<meta name="description" content="Lightweight library for tag management for your HTML forms with autocomplete features. Easy to install and configure."/>
+	<meta name="keywords" content="javascript, input, tags, easy, lightweight, library, html5, vanilla, js"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+	<!-- FAVICON -->
+	<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAE6klEQVRo3tWae0xWZRzHD4WmrmSwNpybZJetWVptabmVkf/Y3VZbRbkuKKUOdayAVUZaSZgTnG2IpSyNbFkzydKlpamk+EcS0DQVKoIY4lwgIMLQ99vvx/OcnvPezjnwnvOe47N9tvd9rr/vc78cDS9pmkOkEE8SK4itxGGijqgnjhDfEMXEC8QEp8qNNYMpRBFxlBggYJMA0UisJ9KJhHgKGEE8Q1RJQ+AAvxM5xFi3Bdwiaxsu8Q/xgBsCRhMFRLeLxutcJD4hxjklYCJREwfDQ2kl7olVQCrxpwfG65wnpg1XQKqcBuExZ4jpQxXA3eYvHxhvbIn77QoY7VGft+IskWZHQEHUTOZeCVRkA/k3eiWi0krAJNOp8mA5Bl1TTfRCCu8Fdq0Cvi0EspOtjapYBDRWA/vWAYuutbOCz4kmYITpIpUzHv+7SxfDwzOvAH76CEHu+D5zg3auDI6/e42dVugixkcSkGGa8P0ZqqDus+HhW5Ygonv95sj5lc8Nj3vyoL2ulHVVSSQBVaaJSp9SBTUcCg5beivQ161ap+uMirvhxfC8lk8FBvpE+Ll2IHBJ/G47YVdAF7YvSzEKmGy5MTPW8A8fKv8F1wDtjdKY02TcnUDBbSpu5fKQwkcCrcdEGKdbkipqXk9vd0Af2LCRUlynC1hpmcDYX9c/p/y/LxZ+A/3Au3crf65Zdvs/Ds7ny3zh398LvH2H8OMK0fPITLA2/qs3BmMTxboA63n/cIUSkH+T8Ht1giiU3Y4VwfF5ZmH3yzblt3As0POv8OfZR/f/IlflvTDJ3A4eO4EA0FLfT2VnsPHJtg4jejOf71C19PNm4ddcB7wyJjj+rztE2IkDxmYXfqeqxKyl+5dlKAHc/aLZ8HmOMJ5b760pA9i8YFDAE7b6HM88RoOK7hOZ9XYCuRMjtNhnqp/z/w9mqkEeauR7080HPS+gehfmFl/7uPDPu75Qk2dYc+O5WXXHfZpboOmo+L9tabRBJsJ5huEF7Y8j4n/1lvC42Skqf25VYxgvbsf3KuNLHlJhL4/6VJMHcHMBPE3qjgfQ9mXid2ebmIUipdmzVqVprlUGvDkpcvz2BjW4ix8E5l8NbMwEOlqFf18PsOaR0HS7WcAhSwFF6cqYul3qNxcQLc3XBeELFU/FQ4mvu5Z66na3R0pXq9na86+eFZ4pdyHjQAyl7Nng+HU7zcvgGtfXE91d6AK25tEYSIyW7qQ9AbxBC3UlD5uneS1NrbC958SUa1VO3g1ijBz7EfiuSCxy5mkaWEC1rUGsL/3sairtLTjrngb2lgLvTHNre12vyT22deRN80VN8mzCC5I/Djn7WcBqH56+7FLBAp6/TI3n+6PFmrxoDVwmRjcTpcRsIsm4nW70ueFNxDwiMdqZuMynhp8msoiRVvdC6X4coHKnbOtqMUFecfvB8Dbi0eHcTuf4wPhOebwd1vU6Py60eGh8B3FXrA8cs+T86kW3mQyHnpg2eSDgMSffyMbJx4V4zjaOv1Lyy0hPnOb5ZLj0zDpVPi64KSDL7Xdifhnpdcn4v81WWCdfKWfKxwWnBcyL50t9mjz4BBzcVSZ68anBHHk/H6uAUi+/leDHhVUxdqvZfvjYY4z88mQPcWGIJ6kkv3ytojOKmEHkEuVSVC1xiq8+iN/4AC4XrcUOfuKj/QejpxF/qMqeywAAAABJRU5ErkJggg==" sizes="48x48">
+
+	<!-- MANIFEST for Chrome-->
+	<meta name="theme-color" content="#fb8507"/>
+
+	<!-- STYLE -->
+	<!-- <link type="text/css" rel="stylesheet" href="../style.css" media="all" /> -->
+	<style type="text/css">
+@import url(https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap);@import url(https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap);body,h3{color:#333}h3>span:before,main ul li::before{display:inline-block;position:absolute}.text-center,footer,header .wrapper{text-align:center}h1,select{background-repeat:no-repeat}#downloads a>span,#downloads a>svg,span.badge-optional{vertical-align:middle}h3>span,main ul li,pre{position:relative}body{font:400 16px/1 'Fira Sans',sans-serif;background-color:#fff;margin:0}main dd,main p,main ul,pre{line-height:1.5}html{scrollbar-color:#ff7f4d #ffeada}br.cf{clear:both;display:block}.text-right{text-align:right}.hide{display:none}.clickable:hover:enabled{cursor:pointer}h1,h2,h3,h4{font-family:Montserrat}.mono,code{font-family:Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,monospace}code{padding:2px 6px;background-color:#f7f4f4;color:#000;border-radius:3px}h3>span,hr{border:none}header,section#demo{user-select:none}.wrapper{max-width:960px;margin:0 auto}hr{border-bottom:1px solid #ddd;width:80%;margin:32px auto}h3{margin-top:40px;margin-bottom:32px;font-size:170%;font-weight:600}h3:first-child{margin-top:0}h3>span:before{background-color:#ff481e;width:100%;height:3px;content:" ";left:0;bottom:-8px}a{color:#4878d2}a:hover{color:#2e5aab}header{background-color:#eb5c3b;color:#fff;padding:16px 4px;line-height:2}h1{font-size:200%;font-weight:700;margin:0 0 24px;padding-bottom:16px;background-image:linear-gradient(90deg,transparent 0,#fff 50%,transparent 100%);background-size:50% 1px;background-position:center bottom}h1 .inverted{color:#000;background-color:#ffd800;padding:4px 12px 4px 16px;margin-left:10px;border-radius:3px}h2{font-weight:400;font-size:120%}h2 span.mono{background-color:rgba(255,255,255,.15);color:inherit}#downloads a{display:inline-block;color:#fff;text-decoration:none;padding:10px 30px;border:1px solid #fff;border-radius:4px;transition:.35s}#downloads a:first-child{margin-right:2px}#downloads a:last-child{margin-left:2px}#downloads a:hover{background-color:#fff;color:#eb5c3b}#downloads a>svg{height:16px}section#demo{background-color:#f6f4f4;padding:40px 0;margin-bottom:24px}main ul{padding-left:16px;list-style:none}main ul li::before{content:"";width:6px;height:6px;background-color:#ff7800;border-radius:2px;left:-14px;top:8px}main ul ul{list-style:square;margin-left:10px}pre{background-color:#f5f2f0;padding:52px 16px 16px;border-radius:3px;user-select:text;tab-size:3;margin:12px 0 20px;box-sizing:border-box}pre:has(code.language-html){background-color:#ffeee9}pre:has(code.language-js){background-color:#fff9e3}pre:has(code.language-css){background-color:#eef5ff}pre>code{padding:0;margin:0;background-color:transparent;color:#000;max-height:400px;overflow:auto;display:block;scrollbar-width:thin;scrollbar-color:#ff7f4d rgba(0,0,0,.1)}pre:has(code.language-css):before,pre:has(code.language-html):before,pre:has(code.language-js):before{font-size:13px;text-transform:uppercase;padding:3px 18px;display:block;background-color:#ddd;position:absolute;top:10px;left:-8px;border-bottom:2px solid #1a1a1a;height:34px;line-height:2;box-sizing:border-box;font-family:Montserrat}pre:has(code.language-css):after,pre:has(code.language-html):after,pre:has(code.language-js):after{position:absolute;top:42px;left:-8px;width:0;height:0;border-left:4px solid #fff;border-bottom:4px solid #fff;border-top:4px solid #bbb;border-right:4px solid #bbb;content:""}pre:has(code.language-html):before{content:"HTML";background-color:#ee5f28;color:#fff;border-bottom:2px solid #bbb0ad}pre:has(code.language-html):after{border-top:4px solid #964e34;border-right:4px solid #964e34}pre:has(code.language-js):before{content:"JS";background-color:#fc0;color:#000;border-bottom:2px solid #b1ad9f}pre:has(code.language-js):after{border-top:4px solid #bc9600;border-right:4px solid #bc9600}pre:has(code.language-css):before{content:"CSS";background-color:#80bfff;color:#000;border-bottom:2px solid #1a1a1a}pre:has(code.language-css):after{border-top:4px solid #5c88b5;border-right:4px solid #5c88b5}dl.parameter-definition>dd{margin-left:24px}dl.parameter-definition>dt{margin-top:24px}dl.object-definition{border-left:1px solid #aaa;padding-left:20px;display:grid;grid-template-columns:auto 1fr;gap:20px 12px}dl.object-definition>dd{margin:0}span.badge-optional{display:inline-block;border:1px solid #c3c7cb;color:#51565d;line-height:1;font-size:12px;padding:4px 6px;border-radius:12px}code .token.function{color:#d30038}code .token.parameter{color:#371790}code .token.punctuation{color:#52575e}footer{color:#65625d;padding:30px 0;font-size:85%}footer a{text-decoration:none;border-bottom:1px solid #ccc;padding-bottom:2px}footer a:hover{border-color:#4878d2}button,input,select,textarea{font-family:inherit;font-size:inherit;box-sizing:border-box}button.fw,input.fw,input[type=date].full-width,input[type=email].full-width,input[type=number].full-width,input[type=password].full-width,input[type=text].full-width,input[type=url].full-width,select.full-width,select.fw,textarea.full-width,textarea.fw{width:100%}input[type=date],input[type=email],input[type=number],input[type=password],input[type=text],input[type=url],select,textarea{border-radius:3px;color:#555;border:1px solid #ccc;background-color:#fff;box-shadow:inset 0 1px 1px rgba(0,0,0,.15);padding:6px 10px;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}input[type=date]:hover,input[type=email]:hover,input[type=number]:hover,input[type=password]:hover,input[type=text]:hover,input[type=url]:hover,select:hover,textarea:hover{border-color:#aaa}input[type=date]:focus,input[type=email]:focus,input[type=number]:focus,input[type=password]:focus,input[type=text]:focus,input[type=url]:focus,select:focus,textarea:focus{border-color:#66afe9!important;outline:0!important;box-shadow:inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)!important}select{padding-right:20px;-webkit-appearance:none;-moz-appearance:none;text-overflow:'';background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMTJweCIgeT0iMHB4IiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIzcHgiIHZpZXdCb3g9IjAgMCA2IDMiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDYgMyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBvbHlnb24gcG9pbnRzPSI1Ljk5MiwwIDIuOTkyLDMgLTAuMDA4LDAgIi8+PC9zdmc+");background-position:100% center}select::-ms-expand{display:none}button,input[type=button],input[type=submit]{border-radius:2px;border:1px solid;border-color:#ccc #ccc #b3b3b3;padding:6px 12px;margin:0 5px;background-color:#f0f0f0;background-image:linear-gradient(to bottom,#fff,#e6e6e6);text-shadow:0 1px 0 #f8f8f8;color:#333;box-shadow:0 1px 0 rgba(255,255,255,.2) inset;transition:border-color .15s ease-in-out}button:hover:enabled,input[type=button]:hover:enabled,input[type=submit]:hover:enabled{text-shadow:none;border-color:#999}button:active:enabled,input[type=button]:active:enabled,input[type=submit]:active:enabled{background-image:none;transform:translate(0,1px);border-color:#888;text-shadow:none;box-shadow:0 2px 8px -3px rgba(0,0,0,.5) inset;background-color:#eee;transform:translateY(1px)}button:disabled,input[type=button]:disabled,input[type=submit]:disabled{text-shadow:none;color:#999}button.orange,input[type=button].orange,input[type=submit].orange{box-shadow:0 1px 0 #df4c45 inset;background-color:#b72319;background-image:linear-gradient(to bottom,#ce271d,#a41f17);border-color:#a41f17 #a41f17 #951d15;text-shadow:0 -1px 0 #a01d15;color:#fff}button.orange:hover,input[type=button].orange:hover,input[type=submit].orange:hover{box-shadow:0 1px 0 #e8564f inset;background-color:#bf261c;background-image:linear-gradient(to bottom,#db2c20,#a52017);border-color:#871a13;text-shadow:0 -1px 0 #8b1b14;color:#fff}button.orange:active,input[type=button].orange:active,input[type=submit].orange:active{box-shadow:0 2px 8px -3px rgba(0,0,0,.5) inset;background:linear-gradient(to bottom,#a51f17,#c1251b) #b22118;border-color:#66140c #a0150d #a0150d;text-shadow:0 -1px 0 #a41e17;color:#ecdddd}input[type=checkbox].checkbox{appearance:none;width:24px;height:24px;background-color:transparent;border-radius:4px;display:inline-block;vertical-align:middle;position:relative;border:3px solid #00f;background-clip:content-box;padding:3px}input[type=checkbox].checkbox:hover:not(disabled){cursor:pointer;opacity:.7}input[type=checkbox].checkbox:focus::after{background-color:#000}input[type=checkbox].checkbox:checked::after{left:22px}input[type=checkbox].checkbox:checked{background-color:#00f}@media only screen and (min-width:640px){#downloads a{width:224px;box-sizing:border-box}}@media only screen and (max-width:988px){#demo .wrapper,main{max-width:auto;margin:0 16px}}@media only screen and (max-width:840px){body{font-size:15px}}@media only screen and (max-width:640px){body{font-size:14px}#downloads a{padding:8px 18px}pre>code{padding:48px 12px 12px}h1 .inverted{padding:2px 6px 2px 8px}}@media only screen and (max-width:400px){h1{font-size:200%!important}pre>code{font-size:12px}}
+	</style>
+	<link type="text/css" rel="stylesheet" href="./InputTags.css" media="all" />
+
+	<!-- JS -->
+	<script type="text/javascript" src="./InputTags.js"></script>
+	<script type="text/javascript">
+		let inputTagsExample;
+		window.addEventListener('load', function(evt){
+			inputTagsExample=InputTags.enable(
+				'input-tags-example', [
+					{id:1, className:'language', label:'HTML'},
+					{id:2, className:'language', label:'CSS'},
+					{id:3, className:'language', label:'JavaScript', alias:'js'},
+					{id:4, className:'language', label:'Python'},
+					{id:5, className:'language', label:'Java'},
+					{id:6, className:'language', label:'C++', alias:['cpp','plus']},
+					{id:7, className:'language', label:'PHP'},
+					{id:8, className:'language', label:'Ruby'},
+					{id:9, className:'language', label:'Go'},
+					{id:10, group:'Type', label:'Question'},
+					{id:11, group:'Type', label:'Bug'},
+					{id:12, group:'Type', label:'Duplicate', alias:'dupe'},
+					{id:13, group:'Type', label:'Feature request'}
+				]
+			);
+		});
+	</script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+	<div class="wrapper">
+		<h1>Input Tags<span class="inverted">JS</span></h1>
+		<h2>lightweight library for <span class="mono">&lt;form&gt;</span> tag management with autocomplete features</h2>
+		<div id="downloads">
+			<a href="https://github.com/marcrobledo/input-tags-js/releases" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .14.11.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"/><path d="M7.25 7.69V2a.75.75 0 0 1 1.5 0v5.69l1.97-1.97a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 6.78a.75.75 0 1 1 1.06-1.06z"/></svg> <span>Download</span></a>
+			<a href="https://github.com/marcrobledo/input-tags-js" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 0 1 8 8 8 8 0 0 1-5.5 7.6c-.3 0-.5-.2-.5-.4V13c0-.7-.2-1.2-.5-1.5 1.7-.2 3.6-.9 3.6-4 0-.8-.3-1.5-.8-2 0-.3.4-1 0-2.2 0 0-.8-.2-2.3.8a7.4 7.4 0 0 0-4 0c-1.5-1-2.2-.8-2.2-.8-.4 1.1-.1 2 0 2.1a3 3 0 0 0-.9 2.2c0 3 1.9 3.7 3.7 4-.3.1-.5.5-.6 1-.4.2-1.6.5-2.3-.7-.1-.2-.6-.8-1.2-.8-.7 0-.3.4 0 .5.3.2.7 1 .8 1.2.2.4.7 1.3 2.7 1v1.4c0 .2-.1.5-.5.4A8 8 0 0 1 0 8a8 8 0 0 1 8-8Z"/></svg> <span>See GitHub repo</span></a>
+		</div>
+	</div>
+</header>
+
+<!-- DEMO -->
+<section id="demo">
+	<div class="wrapper">
+		<h3><span>Demo</span></h3>
+		<form>
+			<input type="text" id="input-tags-example" placeholder="Add new tags" />
+			<input type="hidden" name="tags[]" value="1" />
+			<input type="hidden" name="tags[]" value="2" />
+			<input type="hidden" name="tags[]" value="3" />
+			<input type="hidden" name="tags[]" value="10" />
+		</form>
+	</div>
+</section>
+
+<!-- MAIN -->
+<main><div class="wrapper">
+	<h3><span>Installation</span></h3>
+	<ul>
+		<li>
+			add <code>InputTags.js</code> and <code>InputTags.css</code> to your project files and import them in your HTML code:
+			<pre><code class="language-html">&lt;script type="text/javascript" src="InputTags.js"&gt;&lt;/script&gt;
+&lt;link type="text/css" rel="stylesheet" href="InputTags.css" media="all" /&gt;</code></pre></code></pre>
+
+		</li>
+		<li>
+			create your tags <code>&lt;input&gt;</code> element within a <code>&lt;form&gt;</code>:
+			<pre><code class="language-html">&lt;form&gt;
+	&lt;input type="text" id="input-tags-example" placeholder="Add new tags" /&gt;
+&lt;/form&gt;</code></pre>
+		</li>
+		<li>
+			initialize your tags <code>&lt;input&gt;</code>:
+			<pre><code class="language-js">InputTags.enable(
+	'input-tags-example', [
+		{id:1, className:'language', label:'HTML'},
+		{id:2, className:'language', label:'CSS'},
+		{id:3, className:'language', label:'JavaScript', alias:'js'},
+		{id:4, className:'language', label:'Python'},
+		/* ... */
+		{id:10, group:'Type', label:'Question'},
+		{id:11, group:'Type', label:'Bug'},
+		{id:12, group:'Type', label:'Duplicate', alias:'dupe'},
+		{id:13, group:'Type', label:'Feature request'}
+	]
+);</code></pre></li>
+		<li>customize style in <code>InputTags.css</code></li>
+	</ul>
+
+	<hr/>
+	<h3><span>Documentation</span></h3>
+	<p><code>InputTags</code> object provides a single method to initialize a tags <code>&lt;input&gt;</code>:</p>
+	<ul>
+		<li>
+			<code class="language-js">InputTags.<span class="token function">enable</span><span class="token punctuation">(</span><span class="token parameter">settings</span><span class="token punctuation">,</span>
+			<span class="token parameter">knownTags</span><span class="token punctuation">
+			<em class="parameter-optional">[,</span> <span class="token parameter">customTags]</span></em><span class="token punctuation">)</span></code>
+
+			<dl class="parameter-definition">
+				<dt><strong>Parameter</strong> <code>settings</code></dt>
+				<dd>
+					<p>an object that will define the tags <code>&lt;input&gt;</code> behaviour with these properties:</p>
+					<dl class="object-definition">
+						<dt><code>element</code></dt>
+						<dd>
+							the id of the desired <code>&lt;input type="text"&gt;</code> (or the element itself) to be turned into a tags <code>&lt;input&gt;</code>
+						</dd>
+						<dt><code>name</code> <span class="badge-optional">Optional</span></dt>
+						<dd>
+							form hidden field name for tags (default value: <code>tags</code>)
+						</dd>
+
+						<dt><code>maxTags</code> <span class="badge-optional">Optional</span></dt>
+						<dd>
+							maximum number tags allowed to be added (default value is: 10)
+						</dd>
+					</dl>
+				</dd>
+
+
+				<dt><strong>Parameter</strong> <code>knownTags</code></dt>
+				<dd>
+					<p>an array of objects containing information about your known tags, every object has these properties:</p>
+					<dl class="object-definition">
+						<dt><code>id</code></dt>
+						<dd>unique value for the tag</dd>
+
+						<dt><code>label</code></dt>
+						<dd>text that will appear in both the tag itself and the suggestions popover</dd>
+
+						<dt><code>alias</code> <span class="badge-optional">Optional</span></dt>
+						<dd>string or array of strings for alternate searching</dd>
+
+						<dt><code>group</code> <span class="badge-optional">Optional</span></dt>
+						<dd>if specified, only a single tag within the same group will be allowed to be added</dd>
+
+						<dt><code>className</code> <span class="badge-optional">Optional</span></dt>
+						<dd>additional class for styling purposes</dd>
+					</dl>
+				</dd>
+
+
+				<dt><strong>Parameter</strong> <code>customTags</code> <span class="badge-optional">Optional</span></dt>
+				<dd>
+					<p>if provided and <code>true</code>, user will be able to add custom tags (not defined in <code>knownTags</code>)</p>
+					<p>it can be customized by providing an object with the following properties:</p>
+					<dl class="object-definition">
+						<dt><code>name</code> <span class="badge-optional">Optional</span></dt>
+						<dd>form hidden field name for custom tags (default value is: <code>tags_custom[]</code>)</dd>
+
+						<dt><code>blacklist</code> <span class="badge-optional">Optional</span></dt>
+						<dd>a string or an array of strings of unallowed values in custom tags</dd>
+					</dl>
+				</dd>
+
+
+				<dt><strong>Return value</strong></dt>
+				<dd>
+					<p>an object with several methods:</p>
+					<dl class="object-definition">
+						<dt><code>addTag(value[, label])</code></dt>
+						<dd>
+							add a tag by its <code>value</code> and optional <code>label</code> (if not provided, it will be the same as <code>value</code>)
+						</dd>
+
+						<dt><code>removeTag(value)</code></dt>
+						<dd>
+							remove a tag by its <code>value</code>
+						</dd>
+
+						<dt><code>removeTagByIndex(index)</code></dt>
+						<dd>
+							remove a tag by its <code>index</code>
+						</dd>
+
+						<dt><code>removeTags()</code></dt>
+						<dd>
+							remove all tags
+						</dd>
+
+						<dt><code>getCurrentTags()</code></dt>
+						<dd>
+							get an object with information about the current tags
+						</dd>
+
+						<dt><code>setKnownTags(knownTags)</code></dt>
+						<dd>
+							replaces the <code>knownTags</code> object defined during initialization with a new one (must follow the same object structure as the constructor)
+						</dd>
+
+						<dt><code>refresh()</code></dt>
+						<dd>
+							refresh the HTML elements, useful when the DOM has changed
+						</dd>
+					</dl>
+				</dd>
+			</dl>
+		</li>
+	</ul>
+
+	<hr/>
+	<h3><span>License</span></h3>
+	<p>This project is released under MIT license.</p>
+</div></main>
+
+<!-- FOOTER -->
+<footer class="wrapper">
+	Made by <a href="https://www.marcrobledo.com">Marc Robledo</a> &middot;
+	Follow at: <a href="https://github.com/marcrobledo" target="_blank">GitHub</a>, <a href="https://bsky.app/profile/marcrobledo.com" target="_blank">Bluesky</a> &amp; <a href="https://x.com/marc_robledo" target="_blank">Twitter</a>
+</footer>
+
+</body>
+</html>
