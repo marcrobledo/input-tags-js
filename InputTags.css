@@ -41,11 +41,11 @@
 	text-overflow:ellipsis;
 	vertical-align:middle;
 }
-.input-tag-language{
+.input-tag-language, .input-tag-group-channel{
 	background-color:#c2d2f9;
 	color:#394f84;
 }
-.input-tag-13{ /* feature request */
+.input-tag-13, .input-tag-group-user{ /* feature request */
 	background-color:#b5dfa9;
 	color:#416a35;
 }
@@ -156,4 +156,28 @@
 .input-tags-popover button:hover{
 	background-color:#ddd;
 	cursor:pointer
+}
+
+
+
+
+#input-tags-container-example2{
+	background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJtMjEuNyAyMC4zLTUuNC01LjRhOCA4IDAgMCAwLS42LTEwLjYgOCA4IDAgMCAwLTExLjQgMCA4IDggMCAwIDAgMCAxMS40IDggOCAwIDAgMCAxMC42LjZsNS40IDUuNCAxLjQtMS40Wk0xMCAxNmE2IDYgMCAwIDEtNi02IDYgNiAwIDAgMSA2LTYgNiA2IDAgMCAxIDYgNiA2IDYgMCAwIDEtNiA2WiIvPjwvc3ZnPg==');
+	background-repeat:no-repeat;
+	background-position: center right 12px;
+	background-size:20px;
+	padding-right:36px;
+
+}
+#input-tags-container-example2 .button-tag-remove{display:none}
+
+
+@media only screen and (max-width:640px){
+	.input-tags-container.with-tags-many{
+		flex-direction:column;
+	}
+	.input-tags-container-tags{
+		flex-wrap:wrap;
+		gap:4px;
+	}
 }

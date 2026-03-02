@@ -192,8 +192,10 @@ const InputTags = (function () {
 		if (knownTag) {
 			if (typeof knownTag.className === 'string')
 				tagLabelSpan.className += ' input-tag-' + knownTag.className;
-			else if (knownTag.group !== null)
-				tagLabelSpan.className += ' input-tag-group-' + knownTag.group;
+			else if (typeof knownTag.group === 'string')
+				tagLabelSpan.className += ' input-tag-group-' + _slug(knownTag.group);
+			else if (typeof knownTag.group === 'number')
+				tagLabelSpan.className += ' input-tag-group' +knownTag.group;
 		}
 
 		const span = document.createElement('span');
@@ -378,6 +380,10 @@ const InputTags = (function () {
 
 				if (typeof tag.id === 'string' || typeof tag.id === 'number')
 					tagInfo.id = tag.id;
+				else if (typeof tag.group === 'string')
+					tagInfo.id = _slug(tag.group) + '-' + _slug(tag.label);
+				else if (typeof tag.group === 'number')
+					tagInfo.id = 'group' + tag.group + '-' + _slug(tag.label);
 				else
 					tagInfo.id = _slug(tag.label);
 
@@ -519,6 +525,8 @@ const InputTags = (function () {
 
 			inputTagsInfo.elementPopover.className = 'input-tags-popover';
 
+			if(typeof inputTagsInfo.elementInput.id==='string')
+				inputTagsInfo.elementContainer.id = 'input-tags-container-' + inputTagsInfo.elementInput.id.replace(/^input-tags-?/, '');
 
 
 			inputTagsInfo.elementInput.addEventListener('focus', function (evt) {
