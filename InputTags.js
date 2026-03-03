@@ -1,7 +1,7 @@
 /*
 * Input Tags JS
 * Lightweight library for adding an input tags element to your forms
-* (last update: 2026-03-02)
+* (last update: 2026-03-03)
 * By Marc Robledo https://www.marcrobledo.com
 * Documentation and sourcecode: https://www.marcrobledo.com/input-tags-js
 *
@@ -644,6 +644,22 @@ const InputTags = (function () {
 						return _addTag(inputTagsInfo, value, label);
 					}
 					return null;
+				},
+				setInitialTags: function (initialTagIds) {
+					this.removeTags();
+					initialTagIds.forEach((initialTagId) => {
+						const inputHidden = document.createElement('input');
+						inputHidden.type = 'hidden';
+						inputHidden.name = inputTagsInfo.tagsField;
+						inputHidden.value = initialTagId;
+						inputTagsInfo.form.appendChild(inputHidden);
+					});
+					inputTagsInfo.elementInputHiddenAdded.value='';
+					if (inputTagsInfo.elementInputHiddenAddedCustom)
+						inputTagsInfo.elementInputHiddenAddedCustom.value = '';
+					inputTagsInfo.elementInputHiddenRemoved.value='';
+					inputTagsInfo.initialTags = _rebuildCurrentTags(inputTagsInfo).map((currentTag) => currentTag.id);
+					return this.getCurrentTags();
 				},
 				removeTag: function (value) {
 					const currentTags = _getCurrentTags(inputTagsInfo);
