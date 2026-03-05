@@ -1,7 +1,7 @@
 /*
 * Input Tags JS
 * Lightweight library for adding an input tags element to your forms
-* (last update: 2026-03-03)
+* (last update: 2026-03-05)
 * By Marc Robledo https://www.marcrobledo.com
 * Documentation and sourcecode: https://www.marcrobledo.com/input-tags-js
 *
@@ -441,7 +441,7 @@ const InputTags = (function () {
 				throw new Error('InputTags: no valid settings parameter provided');
 
 			const elem = typeof settings.element === 'string' ? document.getElementById(settings.element.trim().replace('#', '')) : settings.element;
-			if (!elem || !elem instanceof HTMLElement || elem.tagName !== 'INPUT' || elem.type !== 'text')
+			if (!elem || !elem instanceof HTMLElement || elem.tagName !== 'INPUT' || (elem.type !== 'text' && elem.type !== 'search'))
 				throw new TypeError('InputTags: element is not an input[type="text"] element');
 			else if (_initializedInputTags.includes(elem))
 				throw new Error('InputTags: element is already an active InputTags instance');
