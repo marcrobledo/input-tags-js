@@ -21,6 +21,7 @@
 .input-tags-container-tags{
 	display:flex;
 	align-items:center;
+	gap:4px;
 }
 .input-tag{
 	font-size:12px;
