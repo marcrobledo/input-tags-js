@@ -276,6 +276,7 @@ const InputTags = (function () {
 
 		//find tags that contain the slug
 		const regex = new RegExp(slug, 'i');
+		debugger;
 		let filteredTags = inputTagsInfo.knownTags;
 		if (slug) {
 			filteredTags = filteredTags.filter(function (tag) {
@@ -286,7 +287,7 @@ const InputTags = (function () {
 			return !currentTags.find((currentTag) => filteredTag.id == currentTag.id)
 		}).filter((filteredTag2) => {
 			return filteredTag2.group === null || currentGroups.indexOf(filteredTag2.group) === -1
-		}).slice(0, inputTagsInfo.maxSuggestions);
+		});
 
 		//if no slug is provided, group available groups in a single button
 		if (!slug) {
@@ -300,6 +301,8 @@ const InputTags = (function () {
 				return acc;
 			}, []);
 		}
+
+		filteredTags = filteredTags.slice(0, inputTagsInfo.maxSuggestions);
 
 		if (filteredTags.length) {
 			inputTagsInfo.elementPopover.innerHTML = '';
