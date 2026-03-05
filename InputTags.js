@@ -212,8 +212,10 @@ const InputTags = (function () {
 		btnRemove.addEventListener('click', function (evt) {
 			const currentTags = _getCurrentTags(inputTagsInfo);
 			const foundTag = currentTags.find((currentTag) => currentTag.id == value);
-			if (foundTag)
+			if (foundTag){
 				_removeTag(inputTagsInfo, foundTag);
+				//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('remove', { detail: { removedTag: foundTag.id } }));
+			}
 		});
 
 		tagLabelSpan.appendChild(spanLong);
@@ -303,7 +305,7 @@ const InputTags = (function () {
 
 		filteredTags = filteredTags.slice(0, inputTagsInfo.maxSuggestions);
 
-		if (filteredTags.length) {
+		if (filteredTags.length && (document.activeElement === inputTagsInfo.elementInput)) {
 			inputTagsInfo.elementPopover.innerHTML = '';
 			filteredTags.forEach(function (tag) {
 				const btn = document.createElement('button');
@@ -326,6 +328,7 @@ const InputTags = (function () {
 						_addTag(inputTagsInfo, tag.id);
 						inputTagsInfo.elementInput.value = '';
 						inputTagsInfo.elementInput.focus();
+						//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('add', { detail: { addedTag: tag.id } }));
 					});
 				}
 				btn.addEventListener('keydown', function (evt) {
@@ -356,6 +359,7 @@ const InputTags = (function () {
 				});
 				inputTagsInfo.elementPopover.appendChild(btn);
 			});
+
 			_showPopover(inputTagsInfo);
 		} else {
 			_hidePopover(inputTagsInfo);
@@ -547,11 +551,9 @@ const InputTags = (function () {
 				_focus(inputTagsInfo);
 				_rebuildPopover(inputTagsInfo);
 			});
-			if (document.activeElement instanceof HTMLElement) {
-				inputTagsInfo.elementInput.addEventListener('blur', function (evt) {
-					_blurFakeEvent(inputTagsInfo);
-				});
-			}
+			inputTagsInfo.elementInput.addEventListener('blur', function (evt) {
+				_blurFakeEvent(inputTagsInfo);
+			});
 			inputTagsInfo.elementContainer.addEventListener('click', _evtStopPropagation);
 			document.body.addEventListener('click', function (evt) {
 				_blur(inputTagsInfo);
@@ -565,21 +567,22 @@ const InputTags = (function () {
 				_rebuildPopover(inputTagsInfo);
 			});
 			elem.addEventListener('keydown', function (evt) {
-				if (evt.keyCode === 13)
-					evt.preventDefault();
-
 				if ((evt.keyCode === 38 || evt.keyCode === 40) && inputTagsInfo.elementPopover.children.length) { //up or down
 					evt.preventDefault();
 
 					if (evt.keyCode === 38) { //up
-						inputTagsInfo.elementPopover.children[inputTagsInfo.elementPopover.children.length - 1].focus();
+						inputTagsInfo.elementPopover.lastChild.focus();
 					} else { //down
-						inputTagsInfo.elementPopover.children[0].focus();
+						inputTagsInfo.elementPopover.firstChild.focus();
 					}
 				} else if (evt.keyCode === 13 && inputTagsInfo.elementPopover.className.indexOf('show') !== -1 && inputTagsInfo.elementPopover.children.length === 1) { //enter with one suggestion
+					evt.preventDefault();
 					inputTagsInfo.elementPopover.children[0].click();
 					_rebuildPopover(inputTagsInfo);
-				} else if (evt.keyCode === 13 || evt.keyCode === 188) { //enter or comma
+				} else if (inputTagsInfo.customTags && evt.keyCode === 13 || evt.keyCode === 188) { //enter or comma
+					if (evt.keyCode === 13 && elem.type !== 'search')
+						evt.preventDefault();
+
 					let added=0;
 					const newTags = elem.value.split(',');
 					newTags.forEach(function (newTag) {
@@ -589,6 +592,7 @@ const InputTags = (function () {
 							if (result) {
 								elem.value = '';
 								added++;
+								//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('add', { detail: { addedTag: slug } }));
 							}
 						}
 					});
@@ -597,12 +601,13 @@ const InputTags = (function () {
 							evt.preventDefault();
 						_rebuildPopover(inputTagsInfo);
 					}
-				} else if (evt.keyCode === 8 && this.selectionStart === 0) {
+				} else if (evt.keyCode === 8 && this.selectionStart === 0) { //backspace
 					const currentTags = _getCurrentTags(inputTagsInfo);
 					if (evt.keyCode === 8 && this.selectionStart === 0 && currentTags.length) {
 						//when backspace is pressed and cursor is at the start of the input
 						const lastTag = currentTags.pop();
 						_removeTag(inputTagsInfo, lastTag);
+						//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('remove', { detail: { removedTag: lastTag.id } }));
 					}
 				}
 			});
@@ -617,6 +622,7 @@ const InputTags = (function () {
 							if (result) {
 								elem.value = '';
 								added++;
+								//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('add', { detail: { addedTag: slug } }));
 							}
 						}
 					});
