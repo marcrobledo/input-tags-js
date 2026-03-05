@@ -276,7 +276,6 @@ const InputTags = (function () {
 
 		//find tags that contain the slug
 		const regex = new RegExp(slug, 'i');
-		debugger;
 		let filteredTags = inputTagsInfo.knownTags;
 		if (slug) {
 			filteredTags = filteredTags.filter(function (tag) {
