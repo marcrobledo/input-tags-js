@@ -198,8 +198,12 @@ const InputTags = (function () {
 				tagLabelSpan.className += ' input-tag-group' +knownTag.group;
 		}
 
-		const span = document.createElement('span');
-		span.innerHTML = label;
+		const spanLong = document.createElement('span');
+		spanLong.className = 'input-tag-label-long';
+		spanLong.innerHTML = label;
+		const spanShort = document.createElement('span');
+		spanShort.className = 'input-tag-label-short';
+		spanShort.innerHTML = knownTag && knownTag.labelShort ? knownTag.labelShort : label;
 
 		const btnRemove = document.createElement('button');
 		btnRemove.type = 'button';
@@ -212,7 +216,8 @@ const InputTags = (function () {
 				_removeTag(inputTagsInfo, foundTag);
 		});
 
-		tagLabelSpan.appendChild(span);
+		tagLabelSpan.appendChild(spanLong);
+		tagLabelSpan.appendChild(spanShort);
 		tagLabelSpan.appendChild(btnRemove);
 
 		return tagLabelSpan;
@@ -237,6 +242,9 @@ const InputTags = (function () {
 
 		_setInputTagsClassName(inputTagsInfo, false, _getInputTags(inputTagsInfo).length);
 		_hidePopover(inputTagsInfo);
+
+		if(/^[^:]+:$/.test(inputTagsInfo.elementInput.value.trim()))
+			inputTagsInfo.elementInput.value='';
 	}
 	const _blurFakeEvent = function (inputTagsInfo) {
 		if (inputTagsInfo.blurTimeout)
@@ -313,7 +321,7 @@ const InputTags = (function () {
 				} else {
 					btn.innerHTML = tag.label;
 					btn.addEventListener('click', function () {
-						_addTag(inputTagsInfo, tag.id, tag.label);
+						_addTag(inputTagsInfo, tag.id);
 						inputTagsInfo.elementInput.value = '';
 						inputTagsInfo.elementInput.focus();
 					});
@@ -374,6 +382,7 @@ const InputTags = (function () {
 				const tagInfo = {
 					id: null,
 					label: null,
+					labelShort: null,
 					alias: '',
 					group: null
 				};
@@ -391,6 +400,9 @@ const InputTags = (function () {
 					tagInfo.label = tag.label;
 				else
 					tagInfo.label = tag.id;
+
+				if (typeof tag.labelShort === 'string')
+					tagInfo.labelShort = tag.labelShort;
 
 				tagInfo.alias += _slug(tagInfo.label);
 				if (typeof tag.alias === 'string')

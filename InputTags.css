@@ -27,7 +27,6 @@
 	background-color:#c9cbd0;
 	color:#555559;
 	padding:8px 8px;
-	margin-right:4px;
 	border-radius:3px;
 
 	display:inline-block;
@@ -40,6 +39,9 @@
 	white-space:nowrap;
 	text-overflow:ellipsis;
 	vertical-align:middle;
+}
+.input-tag>span.input-tag-label-short{
+	display:none;
 }
 .input-tag-language, .input-tag-group-channel{
 	background-color:#c2d2f9;
@@ -173,6 +175,13 @@
 
 
 @media only screen and (max-width:640px){
+	.input-tag>span.input-tag-label-long{
+		display:none;
+	}
+	.input-tag>span.input-tag-label-short{
+		display:inline-block;
+	}
+
 	.input-tags-container.with-tags-many{
 		flex-direction:column;
 	}

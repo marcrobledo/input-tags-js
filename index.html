@@ -33,7 +33,7 @@
 				'input-tags-example', [
 					{id:1, className:'language', label:'HTML'},
 					{id:2, className:'language', label:'CSS'},
-					{id:3, className:'language', label:'JavaScript', alias:'js'},
+					{id:3, className:'language', label:'JavaScript', labelShort:'JS', alias:'js'},
 					{id:4, className:'language', label:'Python'},
 					{id:5, className:'language', label:'Java'},
 					{id:6, className:'language', label:'C++', alias:['cpp','plus']},
@@ -42,8 +42,8 @@
 					{id:9, className:'language', label:'Go'},
 					{id:10, group:'Type', label:'Question'},
 					{id:11, group:'Type', label:'Bug'},
-					{id:12, group:'Type', label:'Duplicate', alias:'dupe'},
-					{id:13, group:'Type', label:'Feature request'}
+					{id:12, group:'Type', label:'Duplicate', labelShort:'Dupe', alias:'dupe'},
+					{id:13, group:'Type', label:'Feature request', labelShort: 'Feat.req.'}
 				]
 			);
 
@@ -214,6 +214,9 @@
 
 						<dt><code>label</code></dt>
 						<dd>text that will appear in both the tag itself and the suggestions popover</dd>
+
+						<dt><code>labelShort</code> <span class="badge-optional">Optional</span></dt>
+						<dd>shorter label text that can be used in smaller screens</dd>
 
 						<dt><code>alias</code> <span class="badge-optional">Optional</span></dt>
 						<dd>string or array of strings for alternate searching</dd>
