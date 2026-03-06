@@ -1,7 +1,7 @@
 /*
 * Input Tags JS
 * Lightweight library for adding an input tags element to your forms
-* (last update: 2026-03-05)
+* (last update: 2026-03-06)
 * By Marc Robledo https://www.marcrobledo.com
 * Documentation and sourcecode: https://www.marcrobledo.com/input-tags-js
 *
@@ -188,7 +188,7 @@ const InputTags = (function () {
 
 	const _buildTagLabelSpan = function (inputTagsInfo, value, label, knownTag) {
 		const tagLabelSpan = document.createElement('span');
-		tagLabelSpan.className = 'input-tag input-tag-' + value;
+		tagLabelSpan.className = 'input-tag input-tag-' + _slug(typeof value === 'string'? value : value.toString());
 		if (knownTag) {
 			if (typeof knownTag.className === 'string')
 				tagLabelSpan.className += ' input-tag-' + knownTag.className;
@@ -214,7 +214,7 @@ const InputTags = (function () {
 			const foundTag = currentTags.find((currentTag) => currentTag.id == value);
 			if (foundTag){
 				_removeTag(inputTagsInfo, foundTag);
-				//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('remove', { detail: { removedTag: foundTag.id } }));
+				_dispatchOnChangeTagsEvent(inputTagsInfo);
 			}
 		});
 
@@ -231,7 +231,9 @@ const InputTags = (function () {
 
 
 
-
+	const _dispatchOnChangeTagsEvent = function (inputTagsInfo) {
+		inputTagsInfo.elementInput.dispatchEvent(inputTagsInfo.customEvt);
+	}
 	const _evtStopPropagation = function (evt) {
 		evt.stopPropagation();
 	}
@@ -328,7 +330,7 @@ const InputTags = (function () {
 						_addTag(inputTagsInfo, tag.id);
 						inputTagsInfo.elementInput.value = '';
 						inputTagsInfo.elementInput.focus();
-						//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('add', { detail: { addedTag: tag.id } }));
+						_dispatchOnChangeTagsEvent(inputTagsInfo);
 					});
 				}
 				btn.addEventListener('keydown', function (evt) {
@@ -524,8 +526,11 @@ const InputTags = (function () {
 
 				allowCustomTags: !!tagsFieldCustom,
 				maxTags: maxTags,
-				maxSuggestions: maxSuggestions
+				maxSuggestions: maxSuggestions,
+
+				customEvt: null
 			}
+			inputTagsInfo.customEvt=new CustomEvent('changetags', { detail: { currentTags: function(){ return _getCurrentTags(inputTagsInfo); } } });
 
 			if (Array.isArray(knownTags))
 				inputTagsInfo.knownTags = _parseKnownTags(knownTags);
@@ -592,13 +597,13 @@ const InputTags = (function () {
 							if (result) {
 								elem.value = '';
 								added++;
-								//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('add', { detail: { addedTag: slug } }));
 							}
 						}
 					});
 					if (added){
 						if (evt.keyCode === 188)
 							evt.preventDefault();
+						_dispatchOnChangeTagsEvent(inputTagsInfo);
 						_rebuildPopover(inputTagsInfo);
 					}
 				} else if (evt.keyCode === 8 && this.selectionStart === 0) { //backspace
@@ -607,7 +612,7 @@ const InputTags = (function () {
 						//when backspace is pressed and cursor is at the start of the input
 						const lastTag = currentTags.pop();
 						_removeTag(inputTagsInfo, lastTag);
-						//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('remove', { detail: { removedTag: lastTag.id } }));
+						_dispatchOnChangeTagsEvent(inputTagsInfo);
 					}
 				}
 			});
@@ -622,13 +627,13 @@ const InputTags = (function () {
 							if (result) {
 								elem.value = '';
 								added++;
-								//inputTagsInfo.elementInput.dispatchEvent(new CustomEvent('add', { detail: { addedTag: slug } }));
 							}
 						}
 					});
 					if (added){
 						if (evt.keyCode === 188)
 							evt.preventDefault();
+						_dispatchOnChangeTagsEvent(inputTagsInfo);
 						_rebuildPopover(inputTagsInfo);
 					}
 				}
@@ -657,13 +662,18 @@ const InputTags = (function () {
 					const valueSlug = _slug(value.toString());
 					const knownTag = inputTagsInfo.knownTags.find(function (knownTag) { return knownTag.id === value || knownTag.alias.indexOf(valueSlug) !== -1; });
 					if (knownTag) {
-						return _addTag(inputTagsInfo, knownTag.id);
+						const addedTag=_addTag(inputTagsInfo, knownTag.id);
+						if(addedTag)
+							_dispatchOnChangeTagsEvent(inputTagsInfo);
+						return addedTag;
 					} else {
 						if (!label)
 							label = value;
-						return _addTag(inputTagsInfo, value, label);
+						const addedTag=_addTag(inputTagsInfo, value, label);
+						if(addedTag)
+							_dispatchOnChangeTagsEvent(inputTagsInfo);
+						return addedTag;
 					}
-					return null;
 				},
 				setInitialTags: function (initialTagIds) {
 					this.removeTags();
@@ -686,6 +696,7 @@ const InputTags = (function () {
 					const foundTag = currentTags.find((currentTag) => currentTag.id == value);
 					if (foundTag) {
 						_removeTag(inputTagsInfo, foundTag);
+						_dispatchOnChangeTagsEvent(inputTagsInfo);
 						return foundTag;
 					} else {
 						const valueSlug = _slug(value.toString());
@@ -693,6 +704,7 @@ const InputTags = (function () {
 							const foundTag2 = currentTags.find((currentTag) => currentTag.knownTag && currentTag.knownTag.alias.indexOf(valueSlug) !== -1);
 							if (foundTag2) {
 								_removeTag(inputTagsInfo, foundTag2);
+								_dispatchOnChangeTagsEvent(inputTagsInfo);
 								return foundTag2;
 							}
 						}
@@ -701,15 +713,21 @@ const InputTags = (function () {
 				},
 				removeTagByIndex: function (index) {
 					const currentTags = _getCurrentTags(inputTagsInfo);
-					if (index < currentTags.length)
+					if (index < currentTags.length){
 						_removeTag(inputTagsInfo, currentTags[index]);
+						_dispatchOnChangeTagsEvent(inputTagsInfo);
+					}
 					return currentTags[index];
 				},
 				removeTags: function () {
 					const currentTags = _getCurrentTags(inputTagsInfo);
+					let nRemoved=0;
 					currentTags.forEach(function (currentTag) {
 						_removeTag(inputTagsInfo, currentTag);
+						nRemoved++;
 					});
+					if(nRemoved)
+						_dispatchOnChangeTagsEvent(inputTagsInfo);
 					return currentTags;
 				},
 				getCurrentTags: function () {
